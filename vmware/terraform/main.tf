@@ -36,7 +36,7 @@ resource "null_resource" "create-temp-random-dir" {
 }
 
 module "deployVM_singlenode" {
-  source = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2//vmware_provision"
+  source = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2//vmware_provision"
 
 
   #######
@@ -86,7 +86,7 @@ module "deployVM_singlenode" {
 }
 
 module "push_hostfile" {
-  source               = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2//config_hostfile"
+  source               = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2//config_hostfile"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
@@ -105,7 +105,7 @@ module "push_hostfile" {
 }
 
 module "icphosts" {
-  source                = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2//config_icphosts"
+  source                = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2//config_icphosts"
   
   master_public_ips     = "${join(",", values(var.singlenode_hostname_ip))}"
   proxy_public_ips      = "${join(",", values(var.singlenode_hostname_ip))}"
@@ -118,7 +118,7 @@ module "icphosts" {
 }
 
 module "icp_prereqs" {
-  source               = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2////config_icp_prereqs"
+  source               = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2////config_icp_prereqs"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
@@ -137,7 +137,7 @@ module "icp_prereqs" {
 }
 
 module "icp_download_load" {
-  source                 = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2//config_icp_download"
+  source                 = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2//config_icp_download"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
@@ -162,7 +162,7 @@ module "icp_download_load" {
 }
 
 module "icp_config_yaml" {
-  source                 = "git::https://github.com/tomaiche/ICPModules/template_icp_modules.git?ref=2.2//config_icp_boot_standalone"
+  source                 = "git::https://github.com/tomaiche/ICPModules.git?ref=2.2//config_icp_boot_standalone"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
