@@ -154,6 +154,7 @@
     {
       "name": "docker_binary_url",
       "description": "Location of the Docker Binaries used by IBM Cloud Private",
+      "default": "http://10.7.24.25/icp310/icp-docker-18.03.1_x86_64.bin",
       "type": "string",
       "required": true,
       "secured": false,
@@ -190,7 +191,7 @@
     {
       "name": "enable_metering",
       "description": "Enable / Disable the installation of Metering Service in IBM Cloud Private Installation",
-      "default": "true",
+      "default": "false",
       "type": "string",
       "required": true,
       "secured": false,
@@ -213,6 +214,7 @@
     {
       "name": "icp_binary_url",
       "description": "Location of the IBM Cloud Private Binaries used by IBM Cloud Private",
+      "default": "http://10.7.24.25/icp310/ibm-cp-app-mod-x86_64-3.1.0.tar.gz",
       "type": "string",
       "required": true,
       "secured": false,
@@ -226,6 +228,7 @@
     {
       "name": "icp_cluster_name",
       "description": "IBM Cloud Private Cluster Name",
+      "default": "mycluster",
       "type": "string",
       "required": true,
       "secured": false,
@@ -286,7 +289,7 @@
     {
       "name": "icp_version",
       "description": "IBM Cloud Private Version Number",
-      "default": "2.1.0.3",
+      "default": "3.1.0",
       "type": "string",
       "required": true,
       "secured": false,
@@ -298,7 +301,7 @@
     {
       "name": "kub_version",
       "description": "IBM Cloud Private Kubernetes Version Number",
-      "default": "1.10.0",
+      "default": "1.11.1",
       "type": "string",
       "required": true,
       "secured": false,
@@ -310,7 +313,7 @@
     {
       "name": "singlenode_hostname_ip",
       "default": {
-        "Enter Hostname": "0.0.0.0"
+        "tomicpaio165": "10.7.24.165"
       },
       "description": "Single Node Hostname Prefix and IP Address",
       "type": "map",
@@ -348,6 +351,7 @@
     {
       "name": "singlenode_vm_ipv4_gateway",
       "description": "Single Node IP Gateway Address",
+      "default": "10.7.24.254",
       "type": "string",
       "required": true,
       "secured": false,
@@ -361,6 +365,7 @@
     {
       "name": "singlenode_vm_ipv4_prefix_length",
 			"description": "Integer value between 1 and 32 for the prefix length, CIDR, to use when statically assigning an IPv4 address",
+      "default": "24",
       "type": "string",
       "required": true,
       "secured": false,
@@ -373,6 +378,7 @@
     {
       "name": "singlenode_vm_disk1_datastore",
       "description": "Virtual Machine Datastore Name - Disk 1",
+      "default": "DS-CAM",
       "type": "string",
       "required": true,
       "secured": false,
@@ -384,6 +390,7 @@
     {
       "name": "singlenode_vm_template",
       "description": "Virtual Machine Template Name",
+      "default": "tomrhel400GB",
       "type": "string",
       "required": true,
       "secured": false,
@@ -407,6 +414,7 @@
     {
       "name": "singlenode_vm_os_password",
       "description": "The user password to use while configuring the IBM Cloud Private Single Node.",
+      "default": "Passw0rd!",
       "type": "password",
       "required": true,
       "secured": true,
@@ -474,6 +482,7 @@
     {
       "name": "vm_domain",
       "description": "IBM Cloud Private Single Node Virtual Machine's domain name",
+      "default": "iccmpl.demo",
       "type": "string",
       "required": true,
       "secured": false,
@@ -486,6 +495,7 @@
       "name": "vm_dns_servers",
 			"description": "List of DNS servers for the virtual network adapter. For more than one DNS, the values can be entered by adding more fields.",
       "type": "list",
+      "default": ["10.11.5.1","129.35.160.4"],	
       "required": true,
       "secured": false,
 			"label": "Single Node DNS Servers",
@@ -497,6 +507,7 @@
       "name": "vm_dns_suffixes",
 			"description": "Name resolution suffixes for the virtual network adapter",
       "type": "list",
+      "default": ["iccmpl.demo"],    
       "required": true,
       "secured": false,
 			"label": "Single Node DNS Suffixes",
@@ -509,6 +520,7 @@
       "name": "vsphere_datacenter",
 			"description": "The name of a Datacenter in which to launch the IBM Cloud Private Single Node.",
       "type": "string",
+      "default": "ICP4B",	    
       "required": true,
       "secured": false,
 			"label": "vSphere DataCenter Name",
@@ -520,6 +532,7 @@
       "name": "vsphere_resource_pool",
 			"description": "Name of the default resource pool for the cluster. Specified as 'cluster_name/resource_pool'",
       "type": "string",
+      "default": "icpcamb",	    
       "required": true,
       "secured": false,
 			"label": "vSphere Resource Pool",
@@ -530,6 +543,7 @@
     {
       "name": "vm_network_interface_label",
       "description": "vSphere Port Group name to assign to this network interface.",
+      "default": "VLAN724",	    
       "type": "string",
       "required": true,
       "secured": false,
@@ -541,6 +555,7 @@
     {
       "name": "vm_folder",
       "description": "vSphere Folder name",
+      "default": "icpcamvms/Deploy",	    
       "type": "string",
       "required": false,
       "secured": false,
