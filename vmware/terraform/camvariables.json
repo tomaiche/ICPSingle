@@ -228,7 +228,7 @@
     {
       "name": "icp_cluster_name",
       "description": "IBM Cloud Private Cluster Name",
-      "default": "mycluster",
+      "default": "tomicpaio165",
       "type": "string",
       "required": true,
       "secured": false,
