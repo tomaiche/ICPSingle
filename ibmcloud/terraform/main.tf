@@ -38,39 +38,25 @@ module "deployVM_singlenode" {
 
 
   #######
-  vsphere_datacenter    = "${var.vsphere_datacenter}"
-  vsphere_resource_pool = "${var.vsphere_resource_pool}"
-
+  datacenter    = "${var.datacenter}"
+  
   #######
-  count = "${length(element(keys(var.singlenode_hostname_ip))) }"
+  count = "${length(var.singlenode_hostname) }"
 
   #######
   // vm_folder = "${module.createFolder.folderPath}"
 
   vm_vcpu                    = "${var.singlenode_vcpu}"
-  vm_name                    = "${keys(var.singlenode_hostname_ip)}"
-  vm_memory                  = "${var.singlenode_memory}"
-  vm_template                = "${var.singlenode_vm_template}"
-  vm_os_password             = "${var.singlenode_vm_os_password}"
+  vm_name                    = "${var.singlenode_hostname}"
+  vm_ram                     = "${var.singlenode_memory}"
   vm_os_user                 = "${var.singlenode_vm_os_user}"
   vm_domain                  = "${var.vm_domain}"
-  vm_folder                  = "${var.vm_folder}"
   vm_private_ssh_key         = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}"     : "${var.icp_private_ssh_key}"}"
   vm_public_ssh_key          = "${length(var.icp_public_ssh_key)  == 0 ? "${tls_private_key.generate.public_key_openssh}"  : "${var.icp_public_ssh_key}"}"
   vm_network_interface_label = "${var.vm_network_interface_label}"
-  vm_ipv4_gateway            = "${var.singlenode_vm_ipv4_gateway}"
-  vm_ipv4_address            = "${values(var.singlenode_hostname_ip)}"
-  vm_ipv4_prefix_length      = "${var.singlenode_vm_ipv4_prefix_length}"
-  vm_adapter_type            = "${var.vm_adapter_type}"
   vm_disk1_size              = "${var.singlenode_vm_disk1_size}"
-  vm_disk1_datastore         = "${var.singlenode_vm_disk1_datastore}"
-  vm_disk1_keep_on_remove    = "${var.singlenode_vm_disk1_keep_on_remove}"
   vm_disk2_enable            = "${var.singlenode_vm_disk2_enable}"
   vm_disk2_size              = "${var.singlenode_vm_disk2_size}"
-  vm_disk2_datastore         = "${var.singlenode_vm_disk2_datastore}"
-  vm_disk2_keep_on_remove    = "${var.singlenode_vm_disk2_keep_on_remove}"
-  vm_dns_servers             = "${var.vm_dns_servers}"
-  vm_dns_suffixes            = "${var.vm_dns_suffixes}"
   random                     = "${random_string.random-dir.result}"
   enable_vm                  = "${var.enable_single_node}"
   
@@ -83,13 +69,17 @@ module "deployVM_singlenode" {
   bastion_password    = "${var.bastion_password}"  
 }
 
+variable ipv4_list {
+  
+
+
 module "push_hostfile" {
   source               = "git::https://github.com/tomaiche/ICPModules.git//config_hostfile"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list = "${concat(values(var.singlenode_hostname_ip))}"
+  vm_ipv4_address_list = "${module.deployVM_singlenode.ipv4}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
@@ -105,11 +95,11 @@ module "push_hostfile" {
 module "icphosts" {
   source                = "git::https://github.com/tomaiche/ICPModules.git//config_icphosts"
   
-  master_public_ips     = "${join(",", values(var.singlenode_hostname_ip))}"
-  proxy_public_ips      = "${join(",", values(var.singlenode_hostname_ip))}"
-  management_public_ips = "${join(",", values(var.singlenode_hostname_ip))}"
-  worker_public_ips     = "${join(",", values(var.singlenode_hostname_ip))}"
-  va_public_ips         = "${join(",", values(var.singlenode_hostname_ip))}"
+  master_public_ips     = "${join(",", values(module.deployVM_singlenode.ipv4))}"
+  proxy_public_ips      = "${join(",", values(module.deployVM_singlenode.ipv4))}"
+  management_public_ips = "${join(",", values(module.deployVM_singlenode.ipv4))}"
+  worker_public_ips     = "${join(",", values(module.deployVM_singlenode.ipv4))}"
+  va_public_ips         = "${join(",", values(module.deployVM_singlenode.ipv4))}"
   enable_vm_management  = "${var.enable_vm_management}"
   enable_vm_va          = "${var.enable_vm_va}"
   random                = "${random_string.random-dir.result}"
@@ -121,7 +111,7 @@ module "icp_prereqs" {
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list = "${concat(values(var.singlenode_hostname_ip))}"
+  vm_ipv4_address_list = "${concat(values(module.deployVM_singlenode.ipv4))}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
@@ -140,7 +130,7 @@ module "icp_download_load" {
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
   vm_os_user             = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list   = "${concat(values(var.singlenode_hostname_ip))}"
+  vm_ipv4_address_list   = "${concat(values(module.deployVM_singlenode.ipv4))}"
   docker_url             = "${var.docker_binary_url}"
   icp_url                = "${var.icp_binary_url}"
   icp_version            = "${var.icp_version}"
@@ -165,7 +155,7 @@ module "icp_config_yaml" {
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
   vm_os_user             = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list   = "${concat(values(var.singlenode_hostname_ip))}"
+  vm_ipv4_address_list   = "${concat(values(module.deployVM_singlenode.ipv4))}"
   enable_kibana          = "${lower(var.enable_kibana)}"
   enable_metering        = "${lower(var.enable_metering)}"
   icp_version            = "${var.icp_version}"
