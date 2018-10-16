@@ -500,7 +500,7 @@
       "description": "The user password to use while configuring the IBM Cloud Private Single Node.",
       "type": "password",
       "default": "",    
-      "required": true,
+      "required": false,
       "secured": true,
       "label": "Single Node Template User Password",
       "hidden": false,
