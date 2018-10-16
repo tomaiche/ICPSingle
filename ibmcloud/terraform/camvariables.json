@@ -64,6 +64,156 @@
 	}],
   "template_input_params": [
     {
+        "description": "Softlayer datacenter where infrastructure resources will be deployed",
+        "hidden": false,
+        "immutable": false,
+        "label": "SoftLayer Data Center",
+        "name": "datacenter",
+        "required": true,
+        "secured": false,
+        "type": "string",
+        "options": [
+          {
+              "value": "ams01",
+              "label": "Amsterdam 01, The Netherlands"
+          },
+          {
+              "value": "ams03",
+              "label": "Amsterdam 03, The Netherlands"
+          },
+          {
+              "value": "che01",
+              "label": "Chennai, India"
+          },
+          {
+              "value": "dal01",
+              "label": "Dallas 01, USA"
+          },
+          {
+              "value": "dal02",
+              "label": "Dallas 02, USA"
+          },
+          {
+              "value": "dal05",
+              "label": "Dallas 05, USA"
+          },
+          {
+              "value": "dal06",
+              "label": "Dallas 06, USA"
+          },
+          {
+              "value": "dal07",
+              "label": "Dallas 07, USA"
+          },
+          {
+              "value": "dal09",
+              "label": "Dallas 09, USA"
+          },
+          {
+              "value": "dal10",
+              "label": "Dallas 10, USA"
+          },
+          {
+              "value": "fra02",
+              "label": "Frankfurt, Germany"
+          },
+          {
+              "value": "hkg02",
+              "label": "Hong Kong, China"
+          },
+          {
+              "value": "hou02",
+              "label": "Houston, USA"
+          },
+          {
+              "value": "lon02",
+              "label": "London, England"
+          },
+          {
+              "value": "mel01",
+              "label": "Melbourne, Australia"
+          },
+          {
+              "value": "mil01",
+              "label": "Milan, Italy"
+          },
+          {
+              "value": "mon01",
+              "label": "Montreal, Canada"
+          },
+          {
+              "value": "osl01",
+              "label": "Oslo, Norway"
+          },
+          {
+              "value": "par01",
+              "label": "Paris, France",
+              "default": "true"
+          },
+          {
+              "value": "mex01",
+              "label": "Queréro, Mexico"
+          },
+          {
+              "value": "sjc01",
+              "label": "San Jose 01, USA"
+          },
+          {
+              "value": "sjc03",
+              "label": "San Jose 03, USA"
+          },
+          {
+              "value": "sao01",
+              "label": "Sao Paulo, Brazil"
+          },
+          {
+              "value": "sea01",
+              "label": "Seattle, USA"
+          },
+          {
+              "value": "seo01",
+              "label": "Seoul 01, Korea"
+          },
+          {
+              "value": "sng01",
+              "label": "Singapore, Singapore"
+          },
+          {
+              "value": "syd01",
+              "label": "Sydney, Australia"
+          },
+          {
+              "value": "tok02",
+              "label": "Tokyo, Japan"
+          },
+          {
+              "value": "tor01",
+              "label": "Toronto, Canada"
+          },
+          {
+              "value": "wdc01",
+              "label": "Washington, D.C. 01, USA"
+          },
+          {
+              "value": "wdc04",
+              "label": "Washington, D.C. 04, USA"
+          }
+        ],
+        "group": "virtualmachine"
+    },
+    {
+        "description": "Hostname of the virtual instance to be deployed; Allow 1 to 200 alphanumeric characters and non-consecutive non-leading non-ending dashes",
+        "hidden": false,
+        "immutable": false,
+        "label": "Hostname",
+        "name": "hostname",
+        "required": true,
+        "secured": false,
+        "type": "string",
+        "regex": "^(?!(.*(--)))([A-Za-z0-9]{1,2}|[A-Za-z0-9][A-Za-z0-9-]{1,198}[A-Za-z0-9])$",
+        "group": "virtualmachine"
+    },
+    {
       "name": "bastion_host",
       "type": "string",
       "group_name": "bastion",
@@ -307,21 +457,7 @@
       "immutable": false,
       "group_name": "icpdownload"
     },
-    {
-      "name": "singlenode_hostname_ip",
-      "default": {
-        "Enter Hostname": "0.0.0.0"
-      },
-      "description": "Single Node Hostname Prefix and IP Address",
-      "type": "map",
-      "required": true,
-      "secured": false,
-      "label": "Single Node Hostname - IP",
-      "hidden": false,
-      "immutable": false,
-      "group_name": "virtualmachine"
-    },
-    {
+        {
       "name": "singlenode_memory",
       "description": "Single Node Node Memory Allocation (mb)",
       "default": "16384",
@@ -346,53 +482,6 @@
       "group_name": "virtualmachine"
     },
     {
-      "name": "singlenode_vm_ipv4_gateway",
-      "description": "Single Node IP Gateway Address",
-      "type": "string",
-      "required": true,
-      "secured": false,
-			"label": "Single Node IP Gateway",
-      "hidden": false,
-      "immutable": false,
-      "group_name": "virtualmachine",
-			"regex": "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9]).){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$",
-			"regexdesc": "Provide a Valid IP address for the Virtual Machine Gateway"
-    },
-    {
-      "name": "singlenode_vm_ipv4_prefix_length",
-			"description": "Integer value between 1 and 32 for the prefix length, CIDR, to use when statically assigning an IPv4 address",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Single Node IP Netmask (CIDR)",
-			"hidden": false,
-			"immutable": false,
-			"group_name": "virtualmachine",
-			"regex": "^([8-9]|[1-2][0-9]|3[0-2])$"
-    },
-    {
-      "name": "singlenode_vm_disk1_datastore",
-      "description": "Virtual Machine Datastore Name - Disk 1",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Single Node Datastore Name",
-      "hidden": false,
-      "immutable": false,
-      "group_name": "generalvmtemplate"
-    },
-    {
-      "name": "singlenode_vm_template",
-      "description": "Virtual Machine Template Name",
-      "type": "string",
-      "required": true,
-      "secured": false,
-			"label": "Single Node Template Name",
-      "hidden": false,
-      "immutable": false,
-      "group_name": "generalvmtemplate"
-    },
-    {
       "name": "singlenode_vm_os_user",
       "description": "The user name to use while configuring the IBM Cloud Private Single Node.",
       "default": "root",
@@ -408,21 +497,11 @@
       "name": "singlenode_vm_os_password",
       "description": "The user password to use while configuring the IBM Cloud Private Single Node.",
       "type": "password",
+      "default": '',    
       "required": true,
       "secured": true,
       "label": "Single Node Template User Password",
       "hidden": false,
-      "immutable": false,
-      "group_name": "generalvmtemplate"
-    },
-    {
-      "name": "singlenode_vm_disk1_keep_on_remove",
-      "default": "false",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "Single Node Keep Disk on Remove",
-      "hidden": true,
       "immutable": false,
       "group_name": "generalvmtemplate"
     },
@@ -460,18 +539,6 @@
     ]
     },
     {
-      "name": "vm_adapter_type",
-			"description": "Network adapter type for vNIC Configuration",
-      "default": "vmxnet3",
-      "type": "string",
-      "required": true,
-      "secured": false,
-			"label": "vSphere Network Adapter Type",
-			"hidden": true,
-			"immutable": false,
-			"group_name": "virtualmachine"
-    },
-    {
       "name": "vm_domain",
       "description": "IBM Cloud Private Single Node Virtual Machine's domain name",
       "type": "string",
@@ -482,73 +549,6 @@
       "immutable": false,
       "group_name": "generalvmtemplate"
     },
-    {
-      "name": "vm_dns_servers",
-			"description": "List of DNS servers for the virtual network adapter. For more than one DNS, the values can be entered by adding more fields.",
-      "type": "list",
-      "required": true,
-      "secured": false,
-			"label": "Single Node DNS Servers",
-      "hidden": false,
-			"immutable": false,
-			"group_name": "generalvmtemplate"
-    },
-    {
-      "name": "vm_dns_suffixes",
-			"description": "Name resolution suffixes for the virtual network adapter",
-      "type": "list",
-      "required": true,
-      "secured": false,
-			"label": "Single Node DNS Suffixes",
-      "hidden": false,
-			"immutable": false,
-			"group_name": "generalvmtemplate"
-    },
-
-    {
-      "name": "vsphere_datacenter",
-			"description": "The name of a Datacenter in which to launch the IBM Cloud Private Single Node.",
-      "type": "string",
-      "required": true,
-      "secured": false,
-			"label": "vSphere DataCenter Name",
-      "hidden": false,
-      "immutable": false,
-			"group_name": "cloud"
-    },
-    {
-      "name": "vsphere_resource_pool",
-			"description": "Name of the default resource pool for the cluster. Specified as 'cluster_name/resource_pool'",
-      "type": "string",
-      "required": true,
-      "secured": false,
-			"label": "vSphere Resource Pool",
-      "hidden": false,
-      "immutable": false,
-			"group_name": "cloud"
-    },
-    {
-      "name": "vm_network_interface_label",
-      "description": "vSphere Port Group name to assign to this network interface.",
-      "type": "string",
-      "required": true,
-      "secured": false,
-      "label": "vSphere Port Group Name",
-      "hidden": false,
-      "immutable": false,
-      "group_name": "cloud"
-    },
-    {
-      "name": "vm_folder",
-      "description": "vSphere Folder name",
-      "type": "string",
-      "required": false,
-      "secured": false,
-			"label": "vSphere Folder Name",
-      "hidden": false,
-			"immutable": false,
-			"group_name": "cloud"
-    }
 
   ],
   "template_output_params": [
