@@ -26,7 +26,6 @@ variable "singlenode_vm_disk1_size" {
   default = "400"
 }
 
-}
 
 variable "singlenode_vm_disk2_enable" {
   type    = "string"
