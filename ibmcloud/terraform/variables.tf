@@ -1,5 +1,9 @@
 # Single Node
-variable "hostname" {
+variable "datacenter" {
+  type    = "string"
+}
+
+variable "singlenode_hostname" {
   type    = "string"
 }
 
