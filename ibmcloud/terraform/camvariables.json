@@ -199,7 +199,7 @@
               "label": "Washington, D.C. 04, USA"
           }
         ],
-        "group": "virtualmachine"
+        "group_name": "virtualmachine"
     },
     {
         "description": "Hostname of the virtual instance to be deployed; Allow 1 to 200 alphanumeric characters and non-consecutive non-leading non-ending dashes",
@@ -211,7 +211,7 @@
         "secured": false,
         "type": "string",
         "regex": "^(?!(.*(--)))([A-Za-z0-9]{1,2}|[A-Za-z0-9][A-Za-z0-9-]{1,198}[A-Za-z0-9])$",
-        "group": "virtualmachine"
+        "group_name": "virtualmachine"
     },
     {
       "name": "bastion_host",
@@ -436,7 +436,7 @@
     {
       "name": "icp_version",
       "description": "IBM Cloud Private Version Number",
-      "default": "2.1.0.3",
+      "default": "3.1.0",
       "type": "string",
       "required": true,
       "secured": false,
@@ -448,7 +448,7 @@
     {
       "name": "kub_version",
       "description": "IBM Cloud Private Kubernetes Version Number",
-      "default": "1.10.0",
+      "default": "1.11.1",
       "type": "string",
       "required": true,
       "secured": false,
@@ -460,7 +460,7 @@
         {
       "name": "singlenode_memory",
       "description": "Single Node Node Memory Allocation (mb)",
-      "default": "16384",
+      "default": "65536",
       "type": "string",
       "required": true,
       "secured": false,
@@ -472,7 +472,7 @@
     {
       "name": "singlenode_vcpu",
       "description": "Single Node vCPU Allocation",
-      "default": "8",
+      "default": "16",
       "type": "string",
       "required": true,
       "secured": false,
@@ -497,7 +497,7 @@
       "name": "singlenode_vm_os_password",
       "description": "The user password to use while configuring the IBM Cloud Private Single Node.",
       "type": "password",
-      "default": '',    
+      "default": "",    
       "required": true,
       "secured": true,
       "label": "Single Node Template User Password",
@@ -542,6 +542,7 @@
       "name": "vm_domain",
       "description": "IBM Cloud Private Single Node Virtual Machine's domain name",
       "type": "string",
+      "default": "icpcam.ibmcloud",
       "required": true,
       "secured": false,
       "label": "Single Node Domain Name",
