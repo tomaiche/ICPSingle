@@ -53,7 +53,7 @@ module "deployVM_singlenode" {
   vm_domain                  = "${var.vm_domain}"
   vm_private_ssh_key         = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}"     : "${var.icp_private_ssh_key}"}"
   vm_public_ssh_key          = "${length(var.icp_public_ssh_key)  == 0 ? "${tls_private_key.generate.public_key_openssh}"  : "${var.icp_public_ssh_key}"}"
-  vm_network_interface_label = "${var.vm_network_interface_label}"
+  # vm_network_interface_label = "${var.vm_network_interface_label}"
   vm_disk1_size              = "${var.singlenode_vm_disk1_size}"
   vm_disk2_enable            = "${var.singlenode_vm_disk2_enable}"
   vm_disk2_size              = "${var.singlenode_vm_disk2_size}"
@@ -69,7 +69,6 @@ module "deployVM_singlenode" {
   bastion_password    = "${var.bastion_password}"  
 }
 
-variable ipv4_list {
   
 
 
