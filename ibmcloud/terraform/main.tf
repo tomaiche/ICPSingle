@@ -78,7 +78,7 @@ module "push_hostfile" {
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list = "${list("1.2.3.4")}"
+  vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
@@ -94,11 +94,11 @@ module "push_hostfile" {
 module "icphosts" {
   source                = "git::https://github.com/tomaiche/ICPModules.git//config_icphosts"
   
-  master_public_ips     = "${join(",", module.deployVM_singlenode.ipv4)}"
-  proxy_public_ips      = "${join(",", module.deployVM_singlenode.ipv4)}"
-  management_public_ips = "${join(",", module.deployVM_singlenode.ipv4)}"
-  worker_public_ips     = "${join(",", module.deployVM_singlenode.ipv4)}"
-  va_public_ips         = "${join(",", module.deployVM_singlenode.ipv4)}"
+  master_public_ips     = "${join(",", list(module.deployVM_singlenode.ipv4))}"
+  proxy_public_ips      = "${join(",", list(module.deployVM_singlenode.ipv4))}"
+  management_public_ips = "${join(",", list(module.deployVM_singlenode.ipv4))}"
+  worker_public_ips     = "${join(",", list(module.deployVM_singlenode.ipv4))}"
+  va_public_ips         = "${join(",", list(module.deployVM_singlenode.ipv4))}"
   enable_vm_management  = "${var.enable_vm_management}"
   enable_vm_va          = "${var.enable_vm_va}"
   random                = "${random_string.random-dir.result}"
