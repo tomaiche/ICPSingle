@@ -78,8 +78,7 @@ module "push_hostfile" {
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
-  count                = "${length(list(module.deployVM_singlenode.ipv4))}"
+  vm_ipv4_address_list = "${list(length(module.deployVM_singlenode.ipv4) == 0 ? "0.0.0.0" : module.deployVM_singlenode.ipv4)}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
@@ -112,7 +111,6 @@ module "icp_prereqs" {
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
   vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
-  count                = "${length(list(module.deployVM_singlenode.ipv4))}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
@@ -132,7 +130,6 @@ module "icp_download_load" {
   vm_os_password         = "${var.singlenode_vm_os_password}"
   vm_os_user             = "${var.singlenode_vm_os_user}"
   vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
-  count                = "${length(list(module.deployVM_singlenode.ipv4))}"
   docker_url             = "${var.docker_binary_url}"
   icp_url                = "${var.icp_binary_url}"
   icp_version            = "${var.icp_version}"
