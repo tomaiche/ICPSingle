@@ -462,7 +462,6 @@
         {
       "name": "singlenode_memory",
       "description": "Single Node Node Memory Allocation (mb)",
-      # "default": "65536",
       "default": "4096",
       "type": "string",
       "required": true,
@@ -475,7 +474,6 @@
     {
       "name": "singlenode_vcpu",
       "description": "Single Node vCPU Allocation",
-      # "default": "16",
       "default": "1",
       "type": "string",
       "required": true,
