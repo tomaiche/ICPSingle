@@ -206,7 +206,7 @@
         "hidden": false,
         "immutable": false,
         "label": "Hostname",
-        "name": "hostname",
+        "name": "singlenode_hostname",
         "required": true,
         "secured": false,
         "type": "string",
