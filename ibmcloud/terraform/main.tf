@@ -46,8 +46,8 @@ module "deployVM_singlenode" {
   #######
   // vm_folder = "${module.createFolder.folderPath}"
 
-  vm_vcpu                    = "${var.singlenode_vcpu}"
-  vm_name                    = "${var.singlenode_hostname}"
+  vm_cpu                     = "${var.singlenode_vcpu}"
+  hostname                   = "${var.singlenode_hostname}"
   vm_ram                     = "${var.singlenode_memory}"
   vm_os_user                 = "${var.singlenode_vm_os_user}"
   vm_domain                  = "${var.vm_domain}"
