@@ -78,7 +78,7 @@ module "push_hostfile" {
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
-  vm_ipv4_address_list = "${list("169.51.2.186", module.deployVM_singlenode.ipv4)}"
+  vm_ipv4_address_list = "${list(var.singlenode_hostname)}"
   #######
   bastion_host        = "${var.bastion_host}"
   bastion_user        = "${var.bastion_user}"
