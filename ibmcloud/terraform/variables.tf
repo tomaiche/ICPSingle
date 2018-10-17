@@ -122,10 +122,10 @@ variable "enable_single_node" {
 
 variable "enable_vm_va" {
   type    = "string"
-  default = "true"
+  default = "false"
 }
 
 variable "enable_vm_management" {
   type    = "string"
-  default = "true"
+  default = "false"
 }
