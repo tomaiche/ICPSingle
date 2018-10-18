@@ -6,7 +6,7 @@ resource "null_resource" "config_icp_prereq_dependsOn" {
 
 resource "null_resource" "install_python" {
   depends_on = ["null_resource.config_icp_prereq_dependsOn"]
-  count = "${length(var.vm_ipv4_address_list)}"
+  count = "${var.host_count}"
   connection {
     type = "ssh"
     user = "${var.vm_os_user}"
@@ -38,7 +38,7 @@ resource "null_resource" "install_python" {
 resource "null_resource" "install_system_settings" {
   depends_on = ["null_resource.install_python"]
 
-  count = "${length(var.vm_ipv4_address_list)}"
+  count = "${var.host_count}"
   connection {
     type = "ssh"
     user = "${var.vm_os_user}"
