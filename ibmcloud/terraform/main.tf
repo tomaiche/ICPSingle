@@ -73,11 +73,12 @@ module "deployVM_singlenode" {
 
 
 module "push_hostfile" {
-  source               = "git::https://github.com/tomaiche/ICPModules.git//config_hostfile"
+  source               = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_hostfile"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
+  host_count           = "${length(list(var.singlenode_hostname))}"
   vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
   #######
   bastion_host        = "${var.bastion_host}"
@@ -105,11 +106,12 @@ module "icphosts" {
 }
 
 module "icp_prereqs" {
-  source               = "git::https://github.com/tomaiche/ICPModules.git//config_icp_prereqs"
+  source               = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_prereqs"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
   vm_os_user           = "${var.singlenode_vm_os_user}"
+  host_count           = "${length(list(var.singlenode_hostname))}"
   vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
   # vm_ipv4_address_list = "${list(var.singlenode_hostname)}"
   #######
@@ -125,11 +127,12 @@ module "icp_prereqs" {
 }
 
 module "icp_download_load" {
-  source                 = "git::https://github.com/tomaiche/ICPModules.git//config_icp_download"
+  source                 = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_download"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
   vm_os_user             = "${var.singlenode_vm_os_user}"
+  host_count           = "${length(list(var.singlenode_hostname))}"
   vm_ipv4_address_list = "${list(module.deployVM_singlenode.ipv4)}"
   docker_url             = "${var.docker_binary_url}"
   icp_url                = "${var.icp_binary_url}"
@@ -150,7 +153,7 @@ module "icp_download_load" {
 }
 
 module "icp_config_yaml" {
-  source                 = "git::https://github.com/tomaiche/ICPModules.git//config_icp_boot_standalone"
+  source                 = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_boot_standalone"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
