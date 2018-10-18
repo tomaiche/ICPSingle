@@ -106,7 +106,7 @@ module "icphosts" {
 }
 
 module "icp_prereqs" {
-  source               = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_prereqs"
+  source               = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_icp_prereqs"
   
   private_key          = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password       = "${var.singlenode_vm_os_password}"
@@ -127,7 +127,7 @@ module "icp_prereqs" {
 }
 
 module "icp_download_load" {
-  source                 = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_download"
+  source                 = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_icp_download"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
@@ -153,7 +153,7 @@ module "icp_download_load" {
 }
 
 module "icp_config_yaml" {
-  source                 = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud/terraform/tom_modules/config_icp_boot_standalone"
+  source                 = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_icp_boot_standalone"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
   vm_os_password         = "${var.singlenode_vm_os_password}"
