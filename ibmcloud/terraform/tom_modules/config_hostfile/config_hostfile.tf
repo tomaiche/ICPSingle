@@ -7,7 +7,7 @@ resource "null_resource" "master_dependsOn" {
 resource "null_resource" "generate_hostfile" {
   depends_on = ["null_resource.master_dependsOn"]
 
-  count = "${length(var.vm_ipv4_address_list)}"
+  count = "${var.count)}"
   connection {
     type = "ssh"
     user = "${var.vm_os_user}"
