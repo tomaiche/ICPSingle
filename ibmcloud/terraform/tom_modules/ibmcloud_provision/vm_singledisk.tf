@@ -174,7 +174,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "bash -c 'chmod +x VM_add_ssh_key.sh'",
-      "bash -c './VM_add_ssh_key.sh  \"root\" \"${var.vm_private_ssh_key}\" \"${var.vm_public_ssh_key}\">> VM_add_ssh_key.log 2>&1'",
+      "bash -c './VM_add_ssh_key.sh  \"root\" \"${var.vm_public_ssh_key}\" \"${var.vm_private_ssh_key}\">> VM_add_ssh_key.log 2>&1'",
     ]
   }
 
