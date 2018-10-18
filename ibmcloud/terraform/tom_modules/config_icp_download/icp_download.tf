@@ -7,7 +7,7 @@ resource "null_resource" "config_icp_download_dependsOn" {
 
 resource "null_resource" "mkdir-boot-node" {
   depends_on = ["null_resource.config_icp_download_dependsOn"]
-  count = "${length(var.vm_ipv4_address_list)}"
+  count = "${var.host_count}"
   connection {
     type = "ssh"
     user = "${var.vm_os_user}"
@@ -32,7 +32,7 @@ resource "null_resource" "mkdir-boot-node" {
 resource "null_resource" "install_docker" {
   depends_on = ["null_resource.mkdir-boot-node"]
 
-  count = "${length(var.vm_ipv4_address_list)}"
+  count = "${var.host_count}"
   connection {
     type = "ssh"
     user = "${var.vm_os_user}"
@@ -63,7 +63,7 @@ resource "null_resource" "install_docker" {
 resource "null_resource" "load_icp_images" {
   depends_on = ["null_resource.mkdir-boot-node","null_resource.install_docker"]
 
-  count = "${var.enable_bluemix_install == "false" ? length(var.vm_ipv4_address_list) : 0}"
+  count = "${var.enable_bluemix_install == "false" ? var.host_count : 0}"
 #  count = "${length(var.vm_ipv4_address_list)}"
   connection {
     type = "ssh"
