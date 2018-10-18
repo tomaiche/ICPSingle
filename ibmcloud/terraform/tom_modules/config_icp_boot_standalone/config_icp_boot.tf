@@ -7,7 +7,7 @@ resource "null_resource" "config_icp_boot_dependsOn" {
 resource "null_resource" "setup_installer" {
   depends_on = ["null_resource.config_icp_boot_dependsOn"]
 
-  count = "${var.enable_bluemix_install == "true" ? length(var.vm_ipv4_address_list) : 0}"
+  count = "${var.enable_bluemix_install == "true" ? 1 : 0}"
 
   connection {
     type        = "ssh"
@@ -66,7 +66,7 @@ resource "null_resource" "setup_installer" {
 resource "null_resource" "setup_installer_tar" {
   depends_on = ["null_resource.config_icp_boot_dependsOn"]
 
-  count = "${var.enable_bluemix_install == "false" ? length(var.vm_ipv4_address_list) : 0}"
+  count = "${var.enable_bluemix_install == "false" ? 1 : 0}"
 
   connection {
     type        = "ssh"
