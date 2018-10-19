@@ -2,7 +2,7 @@
 variable "datacenter" {
   type    = "string"
 }
-variable "Private_IP_Only" {
+variable "private_ip_only" {
   type    = "string"
 }
 
