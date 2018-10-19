@@ -317,6 +317,29 @@
 			"regexdesc": "http|https|ftp|file Location to download the IBM Cloud Private Docker Binaries"
     },
     {
+      "name": "Private_IP_Only",
+      "description": "Use Only Private Networking on VMs",
+      "default": "true",
+      "type": "string",
+      "required": true,
+      "secured": false,
+      "label": "Private Network Only",
+			"hidden": false,
+			"immutable": false,
+			"options": [{
+					"value": "true",
+					"label": "true"
+					"default": true
+				},
+				{
+					"value": "false",
+					"label": "false",
+
+				}
+			],
+			"group_name": "icpsingle"
+    },
+    {
       "name": "enable_kibana",
       "description": "Enable / Disable the installation of Kibana Service in IBM Cloud Private Installation",
       "default": "false",
