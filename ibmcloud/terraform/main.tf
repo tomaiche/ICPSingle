@@ -42,6 +42,8 @@ module "deployVM_singlenode" {
   
   #######
   count = "${length(var.singlenode_hostname) }"
+  
+  private_ip_only = "${var.private_ip_only}"
 
   #######
   // vm_folder = "${module.createFolder.folderPath}"
