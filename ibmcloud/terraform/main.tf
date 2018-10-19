@@ -99,11 +99,11 @@ module "push_hostfile" {
 module "icphosts" {
   source                = "git::https://github.com/tomaiche/ICPModules.git//config_icphosts"
   
-  master_public_ips     = "${join(",", list(module.deployVM_singlenode.ipv4))}"
-  proxy_public_ips      = "${join(",", list(module.deployVM_singlenode.ipv4))}"
-  management_public_ips = "${join(",", list(module.deployVM_singlenode.ipv4))}"
-  worker_public_ips     = "${join(",", list(module.deployVM_singlenode.ipv4))}"
-  va_public_ips         = "${join(",", list(module.deployVM_singlenode.ipv4))}"
+  master_public_ips     = "${join(",", module.deployVM_singlenode.ipv4)}"
+  proxy_public_ips      = "${join(",", module.deployVM_singlenode.ipv4)}"
+  management_public_ips = "${join(",", module.deployVM_singlenode.ipv4)}"
+  worker_public_ips     = "${join(",", module.deployVM_singlenode.ipv4)}"
+  va_public_ips         = "${join(",", module.deployVM_singlenode.ipv4)}"
   enable_vm_management  = "${var.enable_vm_management}"
   enable_vm_va          = "${var.enable_vm_va}"
   random                = "${random_string.random-dir.result}"
