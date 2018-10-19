@@ -1,6 +1,6 @@
 #
 output "ibm_cloud_private_admin_url" {
-  value = "<a href='https://${module.deployVM_singlenode.ipv4[0]}:8443' target='_blank'>https://${module.deployVM_singlenode.ipv4}:8443</a>"
+  value = "<a href='https://"${module.deployVM_singlenode.ipv4[0]"}:8443' target='_blank'>https://${module.deployVM_singlenode.ipv4}:8443</a>"
 }
 
 output "ibm_cloud_private_admin_user" {
