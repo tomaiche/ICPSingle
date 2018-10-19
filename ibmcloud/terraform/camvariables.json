@@ -328,12 +328,12 @@
 			"immutable": false,
 			"options": [{
 					"value": "true",
-					"label": "true"
+					"label": "true",
 					"default": true
 				},
 				{
 					"value": "false",
-					"label": "false",
+					"label": "false"
 
 				}
 			],
