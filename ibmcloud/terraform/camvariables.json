@@ -317,7 +317,7 @@
 			"regexdesc": "http|https|ftp|file Location to download the IBM Cloud Private Docker Binaries"
     },
     {
-      "name": "Private_IP_Only",
+      "name": "private_ip_only",
       "description": "Use Only Private Networking on VMs",
       "default": "true",
       "type": "string",
