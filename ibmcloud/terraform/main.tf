@@ -43,7 +43,7 @@ module "deployVM_singlenode" {
   #######
   # count = "${length(var.singlenode_hostname) }"
   
-  hostcount = "${length(list(var.singlenode_hostname)) }"
+  # hostcount = "${length(list(var.singlenode_hostname)) }"
   
   private_ip_only = "${var.private_ip_only}"
 
