@@ -41,7 +41,9 @@ module "deployVM_singlenode" {
   datacenter    = "${var.datacenter}"
   
   #######
-  count = "${length(var.singlenode_hostname) }"
+  # count = "${length(var.singlenode_hostname) }"
+  
+  count = "1"
   
   private_ip_only = "${var.private_ip_only}"
 
