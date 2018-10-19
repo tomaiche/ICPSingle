@@ -2,6 +2,9 @@
 variable "datacenter" {
   type    = "string"
 }
+variable "Private_IP_Only" {
+  type    = "string"
+}
 
 variable "singlenode_hostname" {
   type    = "string"
