@@ -1,6 +1,6 @@
 #
 output "ibm_cloud_private_admin_url" {
-  value = "<a href='https://${module.deployVM_singlenode.0.ipv4}:8443' target='_blank'>https://${module.deployVM_singlenode.ipv4}:8443</a>"
+  value = "<a href='https://${module.deployVM_singlenode.${count.index}.ipv4}:8443' target='_blank'>https://${module.deployVM_singlenode.ipv4}:8443</a>"
 }
 
 output "ibm_cloud_private_admin_user" {
@@ -12,5 +12,5 @@ output "ibm_cloud_private_admin_password" {
 }
 
 output "ibm_cloud_private_master_ip" {
-  value = "$(module.deployVM_singlenode.0.ipv4}"
+  value = "$(module.deployVM_singlenode.${count.index}.ipv4}"
 }
