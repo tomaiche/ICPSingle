@@ -8,6 +8,9 @@ variable "datacenter" {
 variable "hostname" {
   description = "Hostname of the virtual instance to be deployed"
 }
+variable "private_ip_only" {
+  type    = "string"
+}
 
 
 variable "enable_vm" {
