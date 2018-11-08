@@ -34,7 +34,8 @@ resource "null_resource" "create-temp-random-dir" {
 }
 
 module "deployVM_singlenode" {
-  source = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud_provision"
+  # source = "git::https://github.com/tomaiche/ICPModules.git//ibmcloud_provision"
+  source               = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/ibmcloud_provision"
 
 
   #######
@@ -97,7 +98,8 @@ module "push_hostfile" {
 }
 
 module "icphosts" {
-  source                = "git::https://github.com/tomaiche/ICPModules.git//config_icphosts"
+  # source                = "git::https://github.com/tomaiche/ICPModules.git//config_icphosts"
+    source               = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_icphosts"
   
   master_public_ips     = "${join(",", module.deployVM_singlenode.ipv4)}"
   proxy_public_ips      = "${join(",", module.deployVM_singlenode.ipv4)}"
