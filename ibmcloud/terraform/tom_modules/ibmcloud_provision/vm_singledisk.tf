@@ -179,8 +179,8 @@ EOF
   }
 
   provisioner "local-exec" {
-    command = "echo \"${self.ipv4_address}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
-  }
+   #  command = "echo \"${self.ipv4_address}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
+ command = "echo \"${self.ipv4_address_private}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
 }
 
 
