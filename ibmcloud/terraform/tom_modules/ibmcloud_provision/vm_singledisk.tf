@@ -114,7 +114,7 @@ rm -rf $user_auth_key_file_private_temp
 echo "adding partition to additionnal disk "
 # add partition on new disk
 
-parted -s /dev/xvdc mklabel gpt mkpart extra ext4 0% 100%
+parted -s /dev/xvdc mklabel msdos mkpart primary 0% 100%
 
 echo "partition added to additionnal disk "
 
