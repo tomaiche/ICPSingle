@@ -141,6 +141,16 @@ if [ -n $PARAM_ICP ]; then
           docker tag ibmcom/icp-inception-amd64:3.1.0-ee ibmcom/icp-inception:3.1.0-ee
       fi
 
+      if [[ "$ARCH" = "x86_64" && "$PARAM_ICP_VERSION" = "3.1.1" ]]; then
+          printf "\033[32m[*] Tagging ICP inception image ibmcom/icp-inception-amd64:3.1.1-ee to ibmcom/icp-inception:3.1.1-ee\033[0m\n"
+          docker tag ibmcom/icp-inception-amd64:3.1.1-ee ibmcom/icp-inception:3.1.1-ee
+      fi
+
+      if [[ "$ARCH" = "x86_64" && "$PARAM_ICP_VERSION" = "3.1.2" ]]; then
+          printf "\033[32m[*] Tagging ICP inception image ibmcom/icp-inception-amd64:3.1.2-ee to ibmcom/icp-inception:3.1.2-ee\033[0m\n"
+          docker tag ibmcom/icp-inception-amd64:3.1.2-ee ibmcom/icp-inception:3.1.2-ee
+      fi
+
       # cd /root/ibm-cloud-private-x86_64-${PARAM_ICP_VERSION}
       # docker run -v $(pwd):/data -e LICENSE=accept ibmcom/icp-inception:${PARAM_ICP_VERSION}-ee cp -r cluster /data
       # mkdir -p cluster/images; mv ${ICP_INSTALLER_FILE_NAME} cluster/images/
