@@ -18,7 +18,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
   datacenter               = "${var.datacenter}"
   network_speed            = 1000
   hourly_billing           = true
-  private_network_only     = false
+  private_network_only     = "${var.private_ip_only}"
+  # private_network_only     = false
   cores                   = "${var.vm_cpu}"
   memory                   = "${var.vm_ram}"
   # flavor_key_name          = "B1.16x64"
@@ -34,7 +35,8 @@ resource "ibm_compute_vm_instance" "softlayer_virtual_guest" {
     type     = "ssh"
     user        = "${var.vm_os_user}"
     private_key = "${var.vm_private_ssh_key}"
-    host     = "${self.ipv4_address}"
+    host     = "${self.ipv4_address_private}"
+#     host     = "${self.ipv4_address}"
     bastion_host        = "${var.bastion_host}"
     bastion_user        = "${var.bastion_user}"
     bastion_private_key = "${ length(var.bastion_private_key) > 0 ? base64decode(var.bastion_private_key) : var.bastion_private_key}"
@@ -179,8 +181,8 @@ EOF
   }
 
   provisioner "local-exec" {
- command = "echo \"${self.ipv4_address}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
- # command = "echo \"${self.ipv4_address_private}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
+ # command = "echo \"${self.ipv4_address}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
+ command = "echo \"${self.ipv4_address_private}       ${var.hostname}.${var.vm_domain} ${var.hostname}\" >> /tmp/${var.random}/hosts"
     }
 }
 
