@@ -132,7 +132,7 @@ module "icp_prereqs" {
   dependsOn            = "${module.deployVM_singlenode.dependsOn}"
 }
 
-module "icp_download_load" {
+module "icp_download" {
   source                 = "git::https://github.com/tomaiche/ICPSingle.git//ibmcloud/terraform/tom_modules/config_icp_download"
   
   private_key            = "${length(var.icp_private_ssh_key) == 0 ? "${tls_private_key.generate.private_key_pem}" : "${var.icp_private_ssh_key}"}"
@@ -184,5 +184,5 @@ module "icp_config_yaml" {
   bastion_password    = "${var.bastion_password}"  
   #######    
   random                 = "${random_string.random-dir.result}"
-  dependsOn              = "[${module.icp_download_load.dependsOn}, ${module.icp_prereqs.dependsOn}]"
+  dependsOn              = "[${module.icp_download.dependsOn}, ${module.icp_prereqs.dependsOn}]"
 }
